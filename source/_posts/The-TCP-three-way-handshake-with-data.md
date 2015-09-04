@@ -1,6 +1,11 @@
 title: TCP连接建立的三次握手过程可以携带数据吗？
 date: 2015-04-15 16:38:00
-tags: tcp linux 协议栈 网络
+tags:
+- tcp
+- linux
+- 协议栈
+- 网络
+categories: 网络
 ---
 
 ## 起因
