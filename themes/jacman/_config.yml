@@ -14,7 +14,7 @@ widgets:
 - links
 - rss
 
-## provide seven widgets:category,tag,rss,archive,tagcloud,links,weibo,douban
+## provide seven widgets:category,tag,rss,,archivetagcloud,links,weibo,douban
 
 
 #### RSS
@@ -49,8 +49,8 @@ creative_commons: by-nc-nd
 
 #### Author information
 author:
-  intro_line1: "Hello, I'm Qianmo."    ## your introduction on the bottom of the page
-  intro_line2: "This is my blog, believe it or not."  ## the 2nd line
+  intro_line1: "Hello, I'm Qianmo."
+  intro_line2: "This is my blog, believe it or not."
   weibo: toqianmo
   weibo_verifier: 43ce7f75
   tsina: 1702810323
@@ -59,9 +59,9 @@ author:
   twitter: hurleyhades
   github: hurley25
   facebook: hurleyhades
-  linkedin:   ## e.g. wuchong1014 for https://www.linkedin.com/in/wuchong1014
-  google_plus:    ## e.g. "111190881341800841449" for https://plus.google.com/u/0/111190881341800841449, the "" is needed!
-  stackoverflow:  ## e.g. 3222790 for http://stackoverflow.com/users/3222790/jark
+  linkedin:
+  google_plus:
+  stackoverflow:
 
 #### Toc
 toc:
