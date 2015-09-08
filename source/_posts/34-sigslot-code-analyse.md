@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
 sigslot库简单到只有一个头文件sigslot.h，打开后洋洋洒洒几千行代码，其实仔细看看绝大多数代码都是为了适应参数数量不同的成员函数指针的定义，为其扩展的模版代码。从定义上看，这个库支持0~8个参数的成员函数绑定。在纸上画一下类的继承关系，很容易就得到了如下的函数继承图（IDE有相关的工具也可以拿来用~）:
 
-![sigslot函数继承图](/images/34/1.png)
+![](/images/34/1.png)
 
 从这个图上看，其实代码关系已经很清晰了。实现了槽函数的类需要继承has\_slots类。而has\_slots类拥有一个std::set<\_signal_base<mt\_policy>*>类型的容器（所有的mt\_policy其实是库定义的三种锁策略而已[单线程无锁、多线程共享全局锁、多线程局部锁]）。所有的\_signal\_base[0-8]的类持有各自的std::list<\_connection_base[0-8]<mt\_policy>>的list容器，而\_connection\_base[0-8]则分别封装了0~8个参数的成员函数的指针。
 

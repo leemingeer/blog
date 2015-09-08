@@ -13,7 +13,7 @@ toc: false
 
 先来张三次握手的图（下面这张图来自网络，若侵犯了作者权利，请联系我删除）：
 
-![TCP三次握手](/images/36/1.png)
+![](/images/36/1.png)
 
 RFC793文档里带有SYN标志的过程包是不可以携带数据的，也就是说三次握手的前两次是不可以携带数据的（逻辑上看，连接还没建立，携带数据好像也有点说不过去）。重点就是第三次握手可不可以携带数据。
 
@@ -21,11 +21,11 @@ RFC793文档里带有SYN标志的过程包是不可以携带数据的，也就�
 
 <!-- more -->
 
-![TCP状态变化图](/images/36/2.png)
+![](/images/36/2.png)
 
 对照着上边的TCP状态变化图的连接建立部分，我们看下RFC793文档的说法。RFC793文档给出的说法如下（省略不重要的部分）：
 
-![RFC793文档](/images/36/3.png)
+![](/images/36/3.png)
 
 重点是这句 “Data or controls which were queued for transmission may be included”，也就是说标准表示，第三次握手的ACK包是可以携带数据。那么Linux的内核协议栈是怎么做的呢？侯捷先生说过，“源码面前，了无秘密”。最近恰逢Kernel4.0正式版发布，那就追查下这个版本的内核协议栈的源码吧。
 
@@ -33,21 +33,21 @@ RFC793文档里带有SYN标志的过程包是不可以携带数据的，也就�
 
 首先， 第三次握手的包是由连接发起方（以下简称客户端）发给端口监听方（以下简称服务端）的，所以只需要找到内核协议栈在一个连接处于SYN-RECV（图中的SYN_RECEIVED）状态时收到包之后的处理过程即可。经过一番搜索后找到了，位于 net\ipv4目录下tcp_input.c文件中的tcp_rcv_state_process函数处理这个过程。如图：
 
-![tcp_rcv_state_process函数](/images/36/4.png)
+![](/images/36/4.png)
 
 这个函数实际上是个TCP状态机，用于处理TCP连接处于各个状态时收到数据包的处理工作。这里有几个并列的switch语句，因为函数很长，所以比较容易看错层次关系。下图是精简了无需关注的代码之后SYN-RECV状态的处理过程：
 
-![SYN-RECV状态的处理过程](/images/36/5.png)
+![](/images/36/5.png)
 
 一定要注意这两个switch语句是并列的。所以当TCP_SYN_RECV状态收到合法规范的二次握手包之后，就会立即把socket状态设置为TCP_ESTABLISHED状态，执行到下面的TCP_ESTABLISHED状态的case时，会继续处理其包含的数据（如果有）。
 
 上面表明了，当客户端发过来的第三次握手的ACK包含有数据时，服务端是可以正常处理的。那么客户端那边呢？那看看客户端处于SYN-SEND状态时，怎么发送第三次ACK包吧。如图：
 
-![SYN-SEND状态](/images/36/6.png)
+![](/images/36/6.png)
 
 tcp_rcv_synsent_state_process函数的实现比较长，这里直接贴出最后的关键点：
 
-![tcp_rcv_synsent_state_process函数](/images/36/7.png)
+![](/images/36/7.png)
 
 一目了然吧？if 条件不满足直接回复单独的ACK包，如果任意条件满足的话则使用inet_csk_reset_xmit_timer函数设置定时器等待短暂的时间。这段时间如果有数据，随着数据发送ACK，没有数据回复ACK。
 
@@ -59,11 +59,11 @@ tcp_rcv_synsent_state_process函数的实现比较长，这里直接贴出最后
 
 这个值默认是0的，那什么情况会导致不为0呢？答案是协议栈发送数据的函数遇到socket状态不是ESTABLISHED的时候，会对这个变量做++操作，并等待一小会时间尝试发送数据。看图：
 
-![tcp_sendmsg](/images/36/8.png)
+![](/images/36/8.png)
 
 net/core/stream.c里的sk_stream_wait_connect函数做了如下操作：
 
-![sk_stream_wait_connect函数](/images/36/9.png)
+![](/images/36/9.png)
 
 sk->sk_write_pending递增，并且等待socket连接到达ESTABLISHED状态后发出数据。这就解释清楚了。
 

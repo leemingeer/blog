@@ -16,7 +16,7 @@ categories: 基础知识
 
 通过/proc/cpuinfo可以查看具体的数据：
 
-![/proc/cpuinfo的信息](/images/32/1.png)
+![](/images/32/1.png)
 
 本文只需要关心红色框内的信息即可，我的CPU拥有36位地址总线，其寻址范围是2^36=64G. 那么其物理上理论能编址的上限就是这么大了。关于48 bits virtual的相关信息以及64 bit的现有实现，则可以[参考这里](http://en.wikipedia.org/wiki/X86-64)。
 
@@ -24,7 +24,7 @@ categories: 基础知识
 
 《Intel® 64 and IA-32 Architectures Software Developer’ s Manual》对物理地址空间的解释如下：
 
-![物理地址空间](/images/32/2.png)
+![](/images/32/2.png)
 
 重点标记的区域请认真阅读，物理地址空间一定就是内存（DRAM）么？显然不是，文档里也指出了物理地址空间可以映射到read-write memory、read-only memory和memory mapped I/O.
 
@@ -38,7 +38,7 @@ categories: 基础知识
 
 啰嗦了这么多，其实只需要明白最初的地址映射表是由BIOS检测并提供给操作系统的就好。而操作系统获取这个表的方法自然就是BIOS的中断调用了。e820调用即可获取这些信息，终端下使用dmesg命令打印内核日志就可以看到内核打印出的物理内存布局了。
 
-![物理内存布局](/images/32/3.png)
+![](/images/32/3.png)
 
 简要解释下上面的输出：
 
@@ -80,7 +80,7 @@ Linux内核采用的伙伴内存分配算法就是用来解决这一问题的。
 
 又要偷懒贴文章了，之前有写过一篇[《进程眼中的线性地址空间》](http://www.0xffffff.org/?p=397)，这里描述的即是虚拟地址空间里的4G线性地址的映射：
 
-![虚拟地址空间](/images/32/4.png)
+![](/images/32/4.png)
 
 学过操作系统的同学一定知道PCB（Process Control Block，进程控制块）吧。
 
@@ -89,7 +89,7 @@ Linux内核采用的伙伴内存分配算法就是用来解决这一问题的。
 具体到Linux内核中，所谓的PCB其实就是task_struct这个结构体了。既然PCB描述了进程的信息，自然也就包括了进程内存空间的相关描述信息了。内存相关信息在struct mm_struct *mm, *active_mm字段，mm指向进程所拥有的内存描述符，而active_mm指向进程运行时所使用的内存描述符。mm_struct里的pgd_t * pgd字段即指向进程的页目录。struct vm_area_struct
 * mmap字段指向虚拟区间（VMA）链表。如下图所示：
 
-![进程内存空间](/images/32/5.png)
+![](/images/32/5.png)
 
 了解了这些，就可以到本文的最后一部分了。
 
