@@ -24,6 +24,8 @@ toc: false
 
 Emmet作为文本编辑器的插件提供给 Eclipse/Aptana，Sublime Text 2，TextMate 1.x，Coda 1.6 and 2.x 等等编辑器作为扩展。我们以我比较喜欢的编辑器 Sublime Text 为例介绍下安装与使用方法吧。（暂时先委屈下Vim，因为Vim的插件自动补全是“Ctrl+Y+逗号/分号”，这个快捷键很不好用，而我还没有找到修改的方法  我暂时在vimrc文件里加入 imap <C-e> <C-y>;  映射到Ctrl+E，官方的重定义方法太麻烦了）
 
+<!-- more -->
+
 P.S. Vim版的Emmet插件代码地址在 https://github.com/mattn/zencoding-vim
 
 Sublime Text版的插件地址在 https://github.com/sergeche/emmet-sublime ，项目的说明文件很详细的指出了如何通过Package Control: Install Package功能安装，如果你是Sublime的粉丝，这应该很简单。如果不理解也没关系，直接把代码下载后解压缩到Sublime所在目录下的Packages目录重启Sublime即可使用。
