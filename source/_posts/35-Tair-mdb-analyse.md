@@ -25,16 +25,16 @@ mdb引擎默认使用POSIX共享内存的方式进行内存的分配和管理。
 
 src\storage\mdb目录是mdb存储引擎的实现，这里的实现、测试和接口文件都放在同一个目录中。其中有关mdb存储实现的文件如下：
 
-	◇ db\_define.{hpp,cpp} —— mdb引擎相关的配置信息和定义。
-	◇ mdb\_factory.{hpp,cpp} —— mdb引擎初始化工厂类的实现。
-	◇ mdb\_manager.{hpp,cpp} —— mdb引擎管理结构的实现。
-	◇ mdb\_instance.{hpp,cpp} —— mdb实例相关的实现。
-	◇ mem\_cache.{hpp,cpp}  —— MemCache结构的实现。
-	◇ mem\_pool.{hpp,cpp} —— MemPool结构的实现。
-	◇ cache\_hashmap.{hpp,cpp} —— 全局缓存KV结构映射的Hash表的实现。
-	◇ mdb\_stat\_manager.{hpp,cpp} —— mdb引擎状态管理相关实现。
-	◇ mdb\_stat.hpp —— mdb引擎读取写入统计的相关数据结构的定义和实现。
-	◇ lock_guard.hpp —— pthread\_mutex\_t的简单RAII封装。
+	◇ db_define.{hpp,cpp} —— mdb引擎相关的配置信息和定义。
+	◇ mdb_factory.{hpp,cpp} —— mdb引擎初始化工厂类的实现。
+	◇ mdb_manager.{hpp,cpp} —— mdb引擎管理结构的实现。
+	◇ mdb_instance.{hpp,cpp} —— mdb实例相关的实现。
+	◇ mem_cache.{hpp,cpp}  —— MemCache结构的实现。
+	◇ mem_pool.{hpp,cpp} —— MemPool结构的实现。
+	◇ cache_hashmap.{hpp,cpp} —— 全局缓存KV结构映射的Hash表的实现。
+	◇ mdb_stat_manager.{hpp,cpp} —— mdb引擎状态管理相关实现。
+	◇ mdb_stat.hpp —— mdb引擎读取写入统计的相关数据结构的定义和实现。
+	◇ lock_guard.hpp —— pthread_mutex_t的简单RAII封装。
 
 其中mdb\_define.{hpp,cpp}里定义了mdb引擎的配置变量，打开共享内存的操作函数以及获取时间、判断当前时间的hour是否在给定区间等函数。
 
