@@ -405,7 +405,7 @@ void ProtocolXml::parseASpeedInfo(QByteArray &recvPacket, ASpeedInfo &aSpeedInfo
 ### 研究server模型的目的
 
 > **适应特定的硬件体系与OS特点**
-比如说相同的server模型在SMP体系下与NUMA下的表现就可能不尽相同，又如在linux 下表现尚可的进程模型在windows下面就非常吃力。好的server 模型应该从硬件和OS 的进步发展中，得到最大化的好处。
+比如说相同的server模型在SMP体系下与NUMA下的表现就可能不尽相同，又如在linux 下表现尚可的进程模型在windows下面就非常吃力。好的server 模型应该从硬件和OS的进步发展中，得到最大化的好处。
 
 ![](/images/33/12.png)
 
