@@ -67,19 +67,19 @@ int add(int a, int b)
 // calc.h
 #ifndef CALC_H_
 #define CALC_H_
- 
+
 #ifdef _cplusplus
 extern "C"
 {
 #endif
- 
+
 void swap(int *, int *);
 int add(int, int);
- 
+
 #ifdef _cplusplus
 }
 #endif
- 
+
 #endif // CALC_H_
 ```
 
@@ -92,17 +92,17 @@ int add(int, int);
 ```c
 #include <stdio.h>
 #include <stdlib.h>
- 
+
 #include "calc.h"
- 
+
 int main(int argc, char *argv[])
 {
     int a = 1, b = 2;
- 
+
     swap(&a, &b);
- 
-    printf("%d %dn", a, b);
- 
+
+    printf("%d %d\n", a, b);
+
     return EXIT_SUCCESS;
 }
 ```
@@ -172,13 +172,13 @@ Unix/Linux中共享库的后缀名通常是.so（微软那个估计大家很熟�
 ```c
 // link1.c
 #include <stdio.h>
- 
+
 int n;
- 
+
 int main(int argc, char *argv[])
 {
     printf("It is %dn", n);
- 
+
     return 0;
 }
 ```
