@@ -22,10 +22,10 @@ toc: false
 ----------
 
 **可以先行阅读的参考资料：**
-[进程眼中的线性地址空间](http://www.0xffffff.org/?p=397)
-[线程眼中的线性地址空间](http://www.0xffffff.org/?p=521)
-[Linux线程的前世今生](http://www.0xffffff.org/?p=397)
-[聊聊内存管理](http://www.0xffffff.org/?p=999)
+[进程眼中的线性地址空间](http://www.0xffffff.org/2013/05/23/18-linux-process-address-space/)
+[线程眼中的线性地址空间](http://www.0xffffff.org/2013/05/23/18-linux-process-address-space/)
+[Linux线程的前世今生](http://www.0xffffff.org/2013/07/30/19-linux-thread-history/)
+[聊聊内存管理](http://www.0xffffff.org/2014/10/31/32-memory-management/)
 [Linux系统调用](http://blog.sae.sina.com.cn/archives/2200)
 [goroutine背后的系统知识](http://www.sizeofvoid.net/goroutine-under-the-hood/)
 
@@ -160,7 +160,7 @@ OSI模型定义的7层结构网络中，TCP协议所在的传输层和应用层�
 
 以太网通常在1500字节上下。所以单次发送的协议包数据最好小于这个值，从而避免IP层分片带来的效率损失。
 
-扩展阅读：[Linux TCP/IP协议栈关于IP分片重组的实现](http://www.0xffffff.org/?p=921)
+扩展阅读：[Linux TCP/IP协议栈关于IP分片重组的实现](http://www.0xffffff.org/2014/04/16/30-linux-ip-fragment/)
 
 ----------
 
@@ -484,7 +484,7 @@ pthread_mutex的 [例子](https://github.com/hurley25/socx/blob/master/socx/base
 
 重头戏，先看看 [【翻译】两种高性能I/O设计模式(Reactor/Proactor)的比较](http://blog.csdn.net/liu251/article/details/8351197)，到时候我们现场重点聊聊Reactor这个。这里就不描述了，细节太多，问题太多。我希望这里作为大家讨论的重点，而不是现在用文字完全描述。
 
-其次，单个EventLoop循环如果跑在了单个进程/线程中，对于多核服务器来说，是个浪费。多线程和多进程需要注意的一些点还有false sharing等现象和cache的利用以及上下的切换。前者看[SMP架构多线程程序的一种性能衰退现象—False Sharing](http://www.0xffffff.org/?p=961)，后者看[cpu绑定和cpu亲和性](http://blog.csdn.net/joker0910/article/details/7484371)。最后不要忘记了**函数重入性与线程安全**。
+其次，单个EventLoop循环如果跑在了单个进程/线程中，对于多核服务器来说，是个浪费。多线程和多进程需要注意的一些点还有false sharing等现象和cache的利用以及上下的切换。前者看[SMP架构多线程程序的一种性能衰退现象—False Sharing](http://www.0xffffff.org/2014/08/09/31-smp-false-sharing/)，后者看[cpu绑定和cpu亲和性](http://blog.csdn.net/joker0910/article/details/7484371)。最后不要忘记了**函数重入性与线程安全**。
 
 **什么，你要代码示例？看[这里](https://github.com/hurley25/linux_system_call/blob/master/src/get_cpu_core_num.c).**
 

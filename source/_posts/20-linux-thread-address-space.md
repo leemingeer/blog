@@ -7,7 +7,7 @@ categories: 基础知识
 toc: false
 ---
 
-以前写过一篇《进程眼中的线性地址空间》，这是她的姊妹篇线程篇。而且和以前一样我们只谈32位Linux下的实现。另外读者可能还需要之前的一篇文章《Linux线程的前世今生》作为前期的辅助资料。
+以前写过一篇[《进程眼中的线性地址空间》](http://www.0xffffff.org/2013/05/23/18-linux-process-address-space/)，这是她的姊妹篇线程篇。而且和以前一样我们只谈32位Linux下的实现。另外读者可能还需要之前的一篇文章[《Linux线程的前世今生》](http://www.0xffffff.org/2013/07/30/19-linux-thread-history/)作为前期的辅助资料。
 
 如果读者已经看过这两篇文章，那么我们就可以继续往下说了。
 
@@ -29,29 +29,29 @@ toc: false
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
- 
+
 void *thread_func(void *args)
 {
     printf("tid: %u pid: %u thread id: %un", getpid(), syscall(224), pthread_self());
- 
+
     while(1) {
         sleep(10);
     }
 }
- 
+
 int main(int argc, char *argv[])
 {
     pthread_t thread;
     int count = 0;
- 
+
     while (pthread_create(&thread, NULL, thread_func, NULL) == 0) {
         sleep(1);
         count++;
     }
- 
+
     perror("Create Error:");
     printf("Max Count:%dn", count);
- 
+
     return EXIT_SUCCESS;
 }
 ```
@@ -84,41 +84,41 @@ P.S. 如果你要问，线程的私有栈在进程的地址空间里在何处分
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
- 
+
 int *p_num;
- 
+
 void *thread_1(void *args)
 {
     int test_num = 1;
- 
+
     printf("test_num: %dn", test_num);
- 
+
     p_num = &test_num;
- 
+
     sleep(2);
- 
+
     printf("test_num: %dn", test_num);
 }
- 
+
 void *thread_2(void *args)
 {
     sleep(1);
- 
+
     if (p_num != NULL) {
         *p_num = 2;
     }
 }
- 
+
 int main(int argc, char *argv[])
 {
     pthread_t thread1, thread2;
- 
+
     pthread_create(&thread1, NULL, thread_1, NULL);
     pthread_create(&thread2, NULL, thread_2, NULL);
- 
+
     pthread_join(thread1, NULL);
     pthread_join(thread2, NULL);
- 
+
     return EXIT_SUCCESS;
 }
 ```

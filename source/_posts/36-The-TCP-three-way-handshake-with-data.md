@@ -27,9 +27,9 @@ RFC793文档里带有SYN标志的过程包是不可以携带数据的，也就�
 
 ![](/images/36/3.png)
 
-重点是这句 “Data or controls which were queued for transmission may be included”，也就是说标准表示，第三次握手的ACK包是可以携带数据。那么Linux的内核协议栈是怎么做的呢？侯捷先生说过，“源码面前，了无秘密”。最近恰逢Kernel4.0正式版发布，那就追查下这个版本的内核协议栈的源码吧。
+重点是这句 “Data or controls which were queued for transmission may be included”，也就是说标准表示，第三次握手的ACK包是可以携带数据。那么Linux的内核协议栈是怎么做的呢？侯捷先生说过，“源码面前，了无秘密”。最近恰逢Kernel 4.0正式版发布，那就追查下这个版本的内核协议栈的源码吧。
 
-在探索源码前，我们假定读者对Linux的基本socket编程很熟悉，起码对连接的流程比较熟悉（可以参考这篇文章[《浅谈服务端编程》](http://www.0xffffff.org/?p=1026)最前边的socket连接过程图）。至于socket接口和协议栈的挂接，可以参阅[《socket接口与内核协议栈的挂接》](http://rock3.info/blog/2013/10/28/socket%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%86%85%E6%A0%B8%E5%8D%8F%E8%AE%AE%E6%A0%88%E7%9A%84%E6%8C%82%E6%8E%A5) 。
+在探索源码前，我们假定读者对Linux的基本socket编程很熟悉，起码对连接的流程比较熟悉（可以参考这篇文章[《浅谈服务端编程》](http://www.0xffffff.org/2014/11/20/33-servie-program/)最前边的socket连接过程图）。至于socket接口和协议栈的挂接，可以参阅[《socket接口与内核协议栈的挂接》](http://rock3.info/blog/2013/10/28/socket%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%86%85%E6%A0%B8%E5%8D%8F%E8%AE%AE%E6%A0%88%E7%9A%84%E6%8C%82%E6%8E%A5) 。
 
 首先， 第三次握手的包是由连接发起方（以下简称客户端）发给端口监听方（以下简称服务端）的，所以只需要找到内核协议栈在一个连接处于SYN-RECV（图中的SYN_RECEIVED）状态时收到包之后的处理过程即可。经过一番搜索后找到了，位于 net\ipv4目录下tcp_input.c文件中的tcp_rcv_state_process函数处理这个过程。如图：
 
