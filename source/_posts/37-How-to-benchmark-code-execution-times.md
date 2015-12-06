@@ -35,6 +35,8 @@ struct timezone {
 };
 ```
 
+<!-- more -->
+
 从结构体定义山看，这个函数获取到的时间精度是微秒（us，10^-6s)。这个函数获得的系统时间是使用墙上时间xtime和jiffies处理得到的。墙上时间从UTC 1970-01-01 00:00:00开始，由主板电池供电的RTC（实时钟）芯片存储。jiffies是Linux内核启动后的节拍数，Linux内核从2.5版内核开始把频率从100调高到1000，即系统运行频率为1s/1000=1ms（毫秒）。由此可见，仅仅使用这两个来源是无法达到us的精度的。不过在Linux内核中，高精度定时器 hrtimer(High Resolution Timer)模块也会对xtime进行修正的，这个模块甚至支持ns（纳秒，10^-9）的时间精度。
 
 在Linux x86\_64系统中，gettimeofday的实现采用了“同时映射一块内存到用户态和内核态，数据由内核态维护，用户态拥有读权限”的方式使得该函数调用不需要陷入内核去获取数据，即Linux x86\_64位系统中，这个函数的调用成本和普通的用户态函数基本一致（小于1ms）。
@@ -90,8 +92,8 @@ struct timespec {
 从参数上看，平时获取时间使用第一个CLOCK\_REALTIME参数即可，用这个参数的话有点类似gettimeofday(2)，但是精度要高一些（10^-9 vs 10^-6）。事实上当时间类型是CLOCK\_PROCESS\_CPUTIME\_ID或CLOCK\_THREAD\_CPUTIME\_ID时，clock\_gettime(2)也有利用rdtsc指令来获取时间。具体的调用成本我没有试验，参考资料里有人做了相关的实验并给出了相关的测试数据，可以参考下。
 
 参考资料：
-[1] Linux man pages.
+[1]  Linux man pages.
 [2] 《Combined Volume Set of Intel® 64 and IA-32 Architectures Software Developer’s Manuals》2B
 [3] 《How to Benchmark Code Execution Times on Intel® IA-32 and IA-64
 Instruction Set Architectures》Gabriele Paoloni
-[4] http://stackoverflow.com/questions/6814792/why-is-clock-gettime-so-erratic
+[4]  http://stackoverflow.com/questions/6814792/why-is-clock-gettime-so-erratic
