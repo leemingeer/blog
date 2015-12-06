@@ -100,6 +100,5 @@ struct timespec {
 参考资料：
 [1]  Linux man pages.
 [2] 《Combined Volume Set of Intel® 64 and IA-32 Architectures Software Developer’s Manuals》2B
-[3] 《How to Benchmark Code Execution Times on Intel® IA-32 and IA-64
-Instruction Set Architectures》Gabriele Paoloni
+[3] 《How to Benchmark Code Execution Times on Intel® IA-32 and IA-64 Instruction Set Architectures》Gabriele Paoloni
 [4]  http://stackoverflow.com/questions/6814792/why-is-clock-gettime-so-erratic
