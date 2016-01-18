@@ -60,7 +60,7 @@ sigslot库简单到只有一个头文件sigslot.h，打开后洋洋洒洒几千�
 
 ![](/images/34/1.png)
 
-从这个图上看，其实代码关系已经很清晰了。实现了槽函数的类需要继承has\_slots类。而has\_slots类拥有一个std::set<\_signal_base<mt\_policy>*>类型的容器（所有的mt\_policy其实是库定义的三种锁策略而已[单线程无锁、多线程共享全局锁、多线程局部锁]）。所有的\_signal\_base[0-8]的类持有各自的std::list<\_connection_base[0-8]<mt\_policy>>的list容器，而\_connection\_base[0-8]则分别封装了0~8个参数的成员函数的指针。
+从这个图上看，其实代码关系已经很清晰了。实现了槽函数的类需要继承`has_slots`类。而`has_slots`类拥有一个`std::set<_signal_base<mt_policy>*>`类型的容器（所有的`mt_policy`其实是库定义的三种锁策略而已[单线程无锁、多线程共享全局锁、多线程局部锁]）。所有的`_signal_base[0-8]`的类持有各自的`std::list<_connection_base[0-8]<mt_policy>>`的list容器，而`_connection_base[0-8]`则分别封装了0~8个参数的成员函数的指针。
 
 这里的重复代码是很多的，作为分析的话完全可以每中类代码只留下一个，这样所有的代码就精简到只有6个类了（反正别的也只是为了适应参数个数写的模版罢了，代码除了参数个数外都是一样的）。
 
