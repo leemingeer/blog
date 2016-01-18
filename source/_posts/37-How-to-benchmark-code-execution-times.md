@@ -72,7 +72,7 @@ inline cycles_t currentcycles() {
 
 <p></p>
 
-#### `clock_gettime(2)
+#### clock_gettime(2)
 
 最后是`clock_gettime(2)`，其原型如下：
 
