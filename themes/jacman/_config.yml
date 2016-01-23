@@ -125,8 +125,8 @@ google_analytics:
 ## You MUST upgrade to Universal Analytics first!
 ## https://developers.google.com/analytics/devguides/collection/upgrade/?hl=zh_CN
 baidu_tongji:
-  enable: true
-  sitecode: d0f2c1797cf296c7724dfd51beb02f34
+  enable: false
+  sitecode: 
 
 cnzz_tongji:
   enable: false
