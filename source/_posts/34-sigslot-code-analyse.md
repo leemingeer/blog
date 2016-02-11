@@ -179,7 +179,7 @@ public:
 
 class signal : public _signal_base
 {
-    typedef std::list<_connection_base *>  connections_list;
+    typedef std::list<_connection_base *> connections_list;
     typedef connections_list::const_iterator const_iterator;
 
 protected:
@@ -204,7 +204,7 @@ public:
     {
         const_iterator it = connected_slots_.begin();
         const_iterator end = connected_slots_.end();
-        while (it != end){
+        while (it != end) {
             (*it)->getdest()->signal_disconnect(this);
             delete *it;
             ++it;
@@ -215,8 +215,7 @@ public:
     template <typename desttype>
     void connect(desttype *pclass, void (desttype::*pmemfun)())
     {
-        _connection_base *conn =
-             new _connection<desttype>(pclass, pmemfun);
+        _connection_base *conn = new _connection<desttype>(pclass, pmemfun);
         connected_slots_.push_back(conn);
 
         pclass->signal_connect(this);
@@ -270,3 +269,4 @@ public:
 
 #endif // _SIGNAL_SLOT_H__
 ```
+
