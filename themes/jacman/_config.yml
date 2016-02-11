@@ -1,4 +1,4 @@
-﻿##### Menu
+##### Menu
 menu:
   主页: /
   归档: /archives
@@ -14,8 +14,7 @@ widgets:
 - links
 - rss
 
-## provide seven widgets:category,tag,rss,,archivetagcloud,links,weibo,douban
-
+## provide eight widgets:github-card,category,tag,rss,archive,tagcloud,links,weibo
 
 #### RSS
 rss: /atom.xml
@@ -26,6 +25,9 @@ imglogo:
   src: img/logo.png
 favicon: img/favicon.ico   ## size:32px*32px
 author_img: img/author.jpg ## size:220px*220px
+apple_icon: img/jacman.jpg ## size:114px*114px,please put image into the theme folder `/jacman/source/img`.
+author_img: img/author.jpg ## size:220px*220px.display author avatar picture.if don't want to display,please don't set this.
+banner_img: #img/banner.jpg ## size:1920px*200px+. Banner Picture
 
 ### Theme Color
 theme_color:
@@ -126,7 +128,7 @@ google_analytics:
 ## https://developers.google.com/analytics/devguides/collection/upgrade/?hl=zh_CN
 baidu_tongji:
   enable: false
-  sitecode: 
+  sitecode:
 
 cnzz_tongji:
   enable: false
