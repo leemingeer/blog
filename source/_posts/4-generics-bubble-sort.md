@@ -7,9 +7,9 @@ categories: 基础知识
 toc: false
 ---
 
-无聊中，于是写了一个冒泡排序的泛型算法。算法很简单，但是个人觉得从C标准库中学到的这种泛型的思想很有益处...
+无聊中，于是写了一个冒泡排序的泛型算法。算法很简单，但是个人觉得从C标准库中学到的这种泛型的思想很有益处。
 
-```c
+```
 /*
 * 冒泡排序的泛型实现
 */
@@ -50,12 +50,12 @@ void BubbleSort(void *base, int n, int elem_size,
     }
 }
 
-int compare_int( void *elem1, void *elem2 )
+int compare_int(void *elem1, void *elem2)
 {
     return (*(int *)elem1 - *(int *)elem2);
 }
 
-int compare_double( void *elem1, void *elem2 )
+int compare_double(void *elem1, void *elem2)
 {
     return (*(double *)elem1 > *(double *)elem2) ? 1 : 0;
 }
