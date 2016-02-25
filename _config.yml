@@ -61,12 +61,15 @@ time_format: HH:mm:ss
 per_page: 4
 pagination_dir: page
 
+archive_generator:
+  per_page: 20
+
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
 theme: jacman
 stylus:
-  compress: true
+  compress: false
 
 plugins:
  - hexo-generator-feed
