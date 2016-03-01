@@ -50,7 +50,7 @@ int main(void)
 
 int main(void)
 {
-    std::thread thd([]{ std::cout << "Thread running...\n" });
+    std::thread thd([]{ std::cout << "Thread running...\n"; });
 
     thd.join();
 
@@ -219,7 +219,7 @@ while (queue_.empty()) {
 这里使用`while`而不是`if`的原因是可能存在虚假唤醒（spurious wake）的问题，这种虚假唤醒的频率和次数都是无法预知的，所以用`while`条件进行检查是最好的做法。或者代码可以直接更优雅的写成这样：
 
 ```c++
-notEmptyCond_.wait(lock, []{return !queue_.empty()});
+notEmptyCond_.wait(lock, [&]{return !queue_.empty()});
 ```
 
 如果等待线程只打算等待一次，那么条件变量也许不是最佳的选择，如果等待的条件是诸如一个特定数据是否可用时，使用期值（future）可能会更合适。C++标准库使用期值来为这类一次性等待的场景建模，在`future`头文件里有两类期值：**唯一期值**（unique futures，`std::future<>`）和**共享期值**（shared futures，`std::shared_future<>`）。这两个类模板是参照`std::unique_ptr`和`std::shared_ptr`建立的。`std::future<>`实例是仅有的一个指向关联事件的实例，而多个`std::shared_future<>`可以指向同一事件。一旦事件发生，`future`就变为就绪，且无法复位。`future`对象本身不是线程安全的，如果多个线程需要访问同一个`future`对象则需要额外的互斥锁做同步，但是多个线程可以访问各自的`std::shared_future<>`副本而无需同步操作。
