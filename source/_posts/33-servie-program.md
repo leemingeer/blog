@@ -87,6 +87,8 @@ int listen(int sockfd, int backlog);
 
 ### TCP相关参数的设置方法
 
+<br />
+
 #### 套接字设置
 
 ```c
@@ -117,6 +119,8 @@ TCP_KEEPCNT / TCP_KEEPIDLE / TCP_KEEPINTVL
 **保活时间：keeplive_time = TCP_KEEPIDLE + TCP_KEEPINTVL \* TCP_KEEPCNT**
 
 从TCP_KEEPIDLE 时间开始，向对端发送一个探测信息，然后每过TCP_KEEPINTVL 发送一次探测信息。**如果在保活时间内，就算检测不到对端了，仍然保持连接。超过这个保活时间，如果检测不到对端，服务器就会断开连接，如果能够检测到对方，那么连接一直持续。**
+
+<br />
 
 #### 内核全局设置
 
@@ -156,7 +160,7 @@ OSI模型定义的7层结构网络中，TCP协议所在的传输层和应用层�
 
 ### 避免分片的效率损失
 
-**数据链路层Maximum Transmission Unit(MTU, 最大传输单元)。**
+**数据链路层Maximum Transmission Unit（MTU, 最大传输单元）。**
 
 以太网通常在1500字节上下。所以单次发送的协议包数据最好小于这个值，从而避免IP层分片带来的效率损失。
 
@@ -417,6 +421,8 @@ void ProtocolXml::parseASpeedInfo(QByteArray &recvPacket, ASpeedInfo &aSpeedInfo
 
 ### 基本模型
 
+<br />
+
 #### 多进程模型与原理
 
 Unix/Linux特有模型，不必多说，可参考**[子进程自父进程继承什么或未继承什么](http://www.cnblogs.com/hnrainll/archive/2011/05/11/2043472.html)。**
@@ -453,6 +459,8 @@ pthread_mutex的 [例子](https://github.com/hurley25/socx/blob/master/socx/base
 
 ### 从同步到异步
 
+<br />
+
 #### 阻塞、非阻塞、同步、异步
 
 ![](/images/33/15.png)
@@ -471,6 +479,8 @@ pthread_mutex的 [例子](https://github.com/hurley25/socx/blob/master/socx/base
 
 **根据这个定义，阻塞，非阻塞，多路复用，信号驱动均属于同步I/O(尽管信号驱动由于习惯原因，在以前被成为异步I/O)**
 
+<br />
+
 #### Linux目前实现的两套异步IO方法
 
 **Pthread实现的AIO**和**Linxu内核实现的Native AIO**。
@@ -482,6 +492,8 @@ pthread_mutex的 [例子](https://github.com/hurley25/socx/blob/master/socx/base
 好吧，不明觉厉的同学暂时还是老老实实的用EventLoop+IO线程池吧~
 
 **吐槽下，windows很早以前的的IOCP就是纯异步了...迅雷很早以前都在用...**
+
+<br />
 
 #### Reactor模型与Proactor模型
 
