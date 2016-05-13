@@ -19,7 +19,7 @@ cJSON是一个超轻巧，携带方便，单文件，简单的可以作为ANSI-C
 
 可以在这个地址下载到cJSON的源代码： http://sourceforge.net/projects/cjson/
 
-__MACOSX目录是提供给Mac OS的源码，我的机器运行的是Fedora 18，所以选择另外一个目录即可。
+__MACOSX目录是在Mac OSX系统下打包引入的临时目录，无视它。
 
 简单的阅读下README文件，先学习cJSON库的使用方法。若是连库都还不会使用，分析源码就无从谈起了。通过简单的了解，我们得知cJSON库实际上只有cJSON.c和cJSON.h两个文件组成，绝对轻量级。
 
