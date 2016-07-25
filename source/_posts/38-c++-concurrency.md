@@ -1,4 +1,4 @@
-title: C++并发编程那些事（上）
+title: C++并发编程那些事
 date: 2016-02-11 21:56:10
 tags:
 - x86
@@ -269,8 +269,6 @@ int main()
 下面主要关注C++11标准库提供的原子变量相关的工具类。最简单的是`std::atomic_flag`类，这个类只提供了`test_and_set()` 和`clear()`两个API，具体使用可以参考[这里](http://en.cppreference.com/w/cpp/atomic/atomic_flag)。
 
 功能更强大的原子模板类是`std::atomic`，这个类重载了常用的一些运算符，也使用typedef定义了很多常见类型的别名便于使用。使用方法很简单，不再赘述，成员函数可以参阅[这里](http://en.cppreference.com/w/cpp/atomic/atomic)。
-
-**上篇暂时就到这里。下篇我们讨论一些高级一点的内容，比如无锁（lockfree）的数据结构和并发相关数据结构的设计以及一些注意事项。**
 
 参考资料：
 
