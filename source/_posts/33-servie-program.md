@@ -23,7 +23,7 @@ toc: false
 
 **可以先行阅读的参考资料：**
 [进程眼中的线性地址空间](http://www.0xffffff.org/2013/05/23/18-linux-process-address-space/)
-[线程眼中的线性地址空间](http://www.0xffffff.org/2013/05/23/18-linux-process-address-space/)
+[线程眼中的线性地址空间](http://www.0xffffff.org/2013/08/02/20-linux-thread-address-space/)
 [Linux线程的前世今生](http://www.0xffffff.org/2013/07/30/19-linux-thread-history/)
 [聊聊内存管理](http://www.0xffffff.org/2014/10/31/32-memory-management/)
 [Linux系统调用](http://blog.sae.sina.com.cn/archives/2200)
